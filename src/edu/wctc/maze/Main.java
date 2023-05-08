@@ -5,6 +5,9 @@ import edu.wctc.maze.io.ConsoleInputService;
 import edu.wctc.maze.io.ConsoleOutputService;
 import edu.wctc.maze.io.InputService;
 import edu.wctc.maze.io.OutputService;
+import edu.wctc.maze.mazeimp.BeginnerMazeConstructionStrategy;
+import edu.wctc.maze.mazeimp.DangerousMazeConstructionStrategy;
+import edu.wctc.maze.mazeimp.TowerMazeConstructionStrategy;
 import edu.wctc.maze.roomimpl.BasicRoom;
 import edu.wctc.maze.roomimpl.DarkRoom;
 import edu.wctc.maze.roomimpl.SimpleRoom;
@@ -12,7 +15,7 @@ import edu.wctc.maze.roomimpl.SimpleRoom;
 public class Main {
     // Create Room objects and link them together to
     // form a maze
-    private static Room createRooms() {
+/*    private static Room createRooms() {
         Room startingRoom = new BasicRoom();
 
         Room anotherRoom = new DarkRoom();
@@ -29,19 +32,26 @@ public class Main {
 
         // Return the starting room
         return startingRoom;
-    }
+    }*/
 
     public static void main(String[] args) {
+        PrintQueue printQueue = PrintQueue.INSTANCE;
         InputService in = new ConsoleInputService();
 
         OutputService out = new ConsoleOutputService();
 
         // TODO Module 7: Create a companion factory and pass it to the construction strategy
 
-        // TODO Module 5: Create a construction strategy to replace the static
-        //  createRooms method in main. Use it below.
 
-        Maze maze = new Maze(createRooms());
+/*        BeginnerMazeConstructionStrategy beginnerMaze = new BeginnerMazeConstructionStrategy();
+        Maze maze = new Maze(beginnerMaze.createRooms());*/
+
+        DangerousMazeConstructionStrategy dangerMaze = new DangerousMazeConstructionStrategy();
+        Maze maze = new Maze(dangerMaze.createRooms());
+
+/*        TowerMazeConstructionStrategy towerMaze = new TowerMazeConstructionStrategy();
+        Maze maze = new Maze(towerMaze.createRooms());*/
+
 
         while (maze.isPlaying()) {
             out.print(maze.getCurrentRoomName());
@@ -53,7 +63,7 @@ public class Main {
             char command = in.getInput();
             maze.performAction(command);
 
-            // TODO Module 6: Flush the print queue to the output service
+            System.out.println(printQueue.flush());
         }
 
         out.print("GAME OVER");

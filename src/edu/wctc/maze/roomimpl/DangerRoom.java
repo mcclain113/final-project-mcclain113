@@ -5,18 +5,17 @@ import edu.wctc.maze.Player;
 import edu.wctc.maze.PrintQueue;
 import edu.wctc.maze.Room;
 
-public class SimpleRoom extends Room {
+public class DangerRoom extends Room {
     PrintQueue printQueue = PrintQueue.INSTANCE;
-    public SimpleRoom() {
-        super("Simple Room",
-                "'Minimalist' would be a nice way of describing this room.");
+    public DangerRoom() {
+        super("Danger Room", "Watch out for explosions");
     }
 
     @Override
     public void performAction(char action, Player player) throws InvalidActionException {
-        if (action == 'l') {
-            player.addToInventory("Scraps");
-            printQueue.enqueue("Wow, there were some amazing treasures hidden here... at one time.");
+        if (action == 'o') {
+            player.addToScore(-10);
+            printQueue.enqueue("Ouch!");
         } else {
             throw new InvalidActionException();
         }
