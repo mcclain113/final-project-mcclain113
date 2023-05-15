@@ -1,5 +1,6 @@
 package edu.wctc.maze.mazeimp;
 
+import edu.wctc.maze.CompanionFactory;
 import edu.wctc.maze.MazeConstructionStrategy;
 import edu.wctc.maze.Room;
 import edu.wctc.maze.roomimpl.BasicRoom;
@@ -10,7 +11,7 @@ public class BeginnerMazeConstructionStrategy implements MazeConstructionStrateg
 
     //The original
     @Override
-    public Room createRooms() {
+    public Room createRooms(CompanionFactory companionFactory) {
         Room startingRoom = new BasicRoom();
 
         Room anotherRoom = new DarkRoom();
@@ -20,6 +21,7 @@ public class BeginnerMazeConstructionStrategy implements MazeConstructionStrateg
         Room thirdRoom = new SimpleRoom();
         anotherRoom.setDown(thirdRoom);
         thirdRoom.setUp(anotherRoom);
+        thirdRoom.setCompanion(companionFactory.getFriendlyCompanion());
 
         Room finalRoom = new BasicRoom();
         anotherRoom.setEast(finalRoom);

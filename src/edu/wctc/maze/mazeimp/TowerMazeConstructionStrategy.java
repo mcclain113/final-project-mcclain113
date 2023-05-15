@@ -1,5 +1,6 @@
 package edu.wctc.maze.mazeimp;
 
+import edu.wctc.maze.CompanionFactory;
 import edu.wctc.maze.MazeConstructionStrategy;
 import edu.wctc.maze.Room;
 import edu.wctc.maze.roomimpl.BasicRoom;
@@ -8,8 +9,9 @@ import edu.wctc.maze.roomimpl.SimpleRoom;
 
 public class TowerMazeConstructionStrategy implements MazeConstructionStrategy {
     @Override
-    public Room createRooms() {
+    public Room createRooms(CompanionFactory companionFactory) {
         Room startingRoom = new SimpleRoom();
+        startingRoom.setCompanion(companionFactory.getSurlyCompanion());
 
         Room secondFloorRoom = new DarkRoom();
         startingRoom.setUp(secondFloorRoom);

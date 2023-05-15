@@ -1,12 +1,10 @@
 package edu.wctc.maze.roomimpl;
 
-import edu.wctc.maze.InvalidActionException;
-import edu.wctc.maze.Player;
-import edu.wctc.maze.PrintQueue;
-import edu.wctc.maze.Room;
+import edu.wctc.maze.*;
 
 public class DangerRoom extends Room {
     PrintQueue printQueue = PrintQueue.INSTANCE;
+
     public DangerRoom() {
         super("Danger Room", "Watch out for explosions");
     }

@@ -1,6 +1,8 @@
 package edu.wctc.maze;
 
 
+import edu.wctc.maze.NintendoCharacter.NintendoCharacterFactory;
+import edu.wctc.maze.SegaCharacter.SegaCharacterFactory;
 import edu.wctc.maze.io.ConsoleInputService;
 import edu.wctc.maze.io.ConsoleOutputService;
 import edu.wctc.maze.io.InputService;
@@ -40,14 +42,14 @@ public class Main {
 
         OutputService out = new ConsoleOutputService();
 
-        // TODO Module 7: Create a companion factory and pass it to the construction strategy
+    CompanionFactory companionFactoryNintendo = new NintendoCharacterFactory();
+    CompanionFactory companionFactorySega = new SegaCharacterFactory();
 
-
-/*        BeginnerMazeConstructionStrategy beginnerMaze = new BeginnerMazeConstructionStrategy();
+/*      BeginnerMazeConstructionStrategy beginnerMaze = new BeginnerMazeConstructionStrategy();
         Maze maze = new Maze(beginnerMaze.createRooms());*/
 
         DangerousMazeConstructionStrategy dangerMaze = new DangerousMazeConstructionStrategy();
-        Maze maze = new Maze(dangerMaze.createRooms());
+        Maze maze = new Maze(dangerMaze.createRooms(companionFactoryNintendo));
 
 /*        TowerMazeConstructionStrategy towerMaze = new TowerMazeConstructionStrategy();
         Maze maze = new Maze(towerMaze.createRooms());*/

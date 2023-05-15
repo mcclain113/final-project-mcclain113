@@ -1,5 +1,7 @@
 package edu.wctc.maze;
 
+import java.io.Console;
+
 public class Maze {
     PrintQueue printQueue = PrintQueue.INSTANCE;
     private Room currentRoom;
@@ -53,7 +55,7 @@ public class Maze {
                 printQueue.enqueue(player.getInventory());
                 break;
             case 'r': // 'r' recruit companion
-                // TODO Module 7: Implement recruiting companions from rooms
+                currentRoom.recruitCompanion(player);
                 break;
             default:
                 // 'x' exit

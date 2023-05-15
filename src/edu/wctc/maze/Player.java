@@ -2,6 +2,8 @@ package edu.wctc.maze;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Player {
     private boolean playing = true;
@@ -10,11 +12,19 @@ public class Player {
 
     private List<String> inventory = new ArrayList<>();
 
-    // TODO Module 7: Add list of companions
+    private List<String> companion = new ArrayList<>();
 
-    // TODO Module 7: Add method to add new companion to the list
+    public void addToCompanion(String item) {
+        companion.add(item);
+    }
 
-    // TODO Module 7: Add method to remove a companion from the list
+    public void removeToCompanion(String item) {
+                int index = IntStream.range(0, companion.size())
+                .filter(i -> Objects.equals(companion.get(i), item))
+                .findFirst()
+                .orElse(-1);
+      companion.remove(index);
+    }
 
     public void addToInventory(String item) {
         inventory.add(item);
