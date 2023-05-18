@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class Player {
+public class Player implements PushObserverable {
     private boolean playing = true;
 
     private int score = 0;
@@ -13,6 +13,8 @@ public class Player {
     private List<String> inventory = new ArrayList<>();
 
     private List<String> companion = new ArrayList<>();
+    private List<PushObserver> observers = new ArrayList<>();
+
 
     public void addToCompanion(String item) {
         companion.add(item);
@@ -28,15 +30,14 @@ public class Player {
 
     public void addToInventory(String item) {
         inventory.add(item);
+        notifyObserverItem(item);
 
-        // TODO Module 8: Notify all companions the player acquired a new item
 
     }
 
     public void addToScore(int points) {
         score += points;
-
-        // TODO Module 8: Notify all companions the player's score changed
+        notifyObserverPoints(points);
 
     }
 
@@ -63,4 +64,22 @@ public class Player {
         playing = false;
     }
 
+    @Override
+    public void addObserver(PushObserver observer) {
+        observers.add(observer);}
+
+    @Override
+    public void removeObserver(PushObserver observer) {observers.remove(observer);}
+
+    @Override
+    public void notifyObserverItem(String item) {
+        for(PushObserver observer : observers){
+            observer.updateItem(item);}
+    }
+
+    @Override
+    public void notifyObserverPoints(int points) {
+        for(PushObserver observer : observers){
+            observer.updatePoints(points);}
+    }
 }

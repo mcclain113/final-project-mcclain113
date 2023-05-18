@@ -1,5 +1,5 @@
 package edu.wctc.maze;
 
-public interface Companion {
+public interface Companion extends PushObserver {
     String getName();
 }

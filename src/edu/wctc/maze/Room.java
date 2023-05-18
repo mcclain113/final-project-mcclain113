@@ -72,6 +72,7 @@ public abstract class Room {
     public void recruitCompanion(Player player) {
         if (companion != null){
             player.addToCompanion(companion.getName());
+            player.addObserver(companion);
             printQueue.enqueue(companion.getName() + " joins you");
             companion=null;
         }
